@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block contenido %}
+<div class="col-md-6">
+   <form class="transfot" method="POST" action="/login" autocomplete="off">
+      <div class="col-md-12">
+         <span>SQL Postgres</span>
+         <h3>Inicia sesión</h3>
+      </div>
+      <div class="col-md-12">
+         <input class="transfot_form" placeholder="Nombre" type="text" name="nombre" required>
+      </div>
+      <div class="col-md-12">
+         <input class="transfot_form" placeholder="Contraseña" type="password" name="contraseña" required>
+      </div>
+      <div class="col-md-12">
+         <label for="database">Selecciona una base de datos:</label>
+         <select class="transfot_form" name="nombre_bbdd" required>
+            {% for valor in base_de_datos %}
+            <option value="{{ valor }}">{{ valor }}</option>
+            {% endfor %}
+         </select>
+      </div>
+      <div class="col-md-12">
+         <button class="get_now" type="submit">Iniciar sesión</button>
+      </div>
+   </form>
+</div>
+{% endblock %}
