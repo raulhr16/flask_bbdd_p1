@@ -1,4 +1,14 @@
 {% extends "base.html" %}
+{% block gif %}
+<div class="loader_bg">
+   <div class="loader"><img src="{{ url_for ('static',filename='images/loading.gif') }}" alt="#" /></div>
+</div>
+{% endblock %}
+
+{% block presentacion %}
+<h1>SQL Postgres</h1>
+<span>Una aplicación web que conecta con un servidor Postgres tras autenticarte.</span>
+{% endblock %}
 {% block contenido %}
 <div class="col-md-6">
    <form class="transfot" method="POST" action="/login" autocomplete="off">

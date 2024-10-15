@@ -23,7 +23,7 @@ def listado_bbdd():
         return lista_bbdd
     except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:", e)
-        sys.exit(1)
+        return -3
         
 def tablas_bbdd(nombre,contraseña,nombre_bbdd):
     try:
@@ -40,7 +40,7 @@ def tablas_bbdd(nombre,contraseña,nombre_bbdd):
         return nombre_tablas_bbdd
     except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:", e)
-        sys.exit(1)
+        return -1
 
 def datos_bbdd(nombre,contraseña,nombre_bbdd,tabla):
     try:
@@ -58,7 +58,7 @@ def datos_bbdd(nombre,contraseña,nombre_bbdd,tabla):
         return datos_tablas, registros
     except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:", e)
-        sys.exit(1)
+        return -4
 
 @app.route('/')
 def inicio():
@@ -67,14 +67,14 @@ def inicio():
 
 @app.route('/login', methods=['POST','GET'])
 def login():
-    if request.method == 'POST':
-        session['usuario'] = request.form['nombre']
-        session['passwd'] = request.form['contraseña']
-        session['bbdd'] = request.form['nombre_bbdd']
-        tablas = tablas_bbdd(session['usuario'],session['passwd'],session['bbdd'])
-        return render_template("login.html",tablas=tablas, bbdd=session['bbdd'])
+    session['usuario'] = request.form['nombre']
+    session['passwd'] = request.form['contraseña']
+    session['bbdd'] = request.form['nombre_bbdd']
+    tablas = tablas_bbdd(session['usuario'],session['passwd'],session['bbdd'])
+    if tablas == -1:
+        return render_template ("404.html")
     else:
-        return render_template('index.html')
+        return render_template("login.html",tablas=tablas, bbdd=session['bbdd'])
     
 @app.route('/login/<nombre_tabla>')
 def tabla(nombre_tabla):

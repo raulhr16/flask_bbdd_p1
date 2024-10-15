@@ -1,25 +1,25 @@
-{% extends "base.html" %}
-{% block contenido %}
-<div class="container">
-    <h3>Datos de la tabla: {{ nombre_tabla }}</h3>
-    
-    <table class="table table-bordered">
-        <thead>
-            <tr>
-                {% for columna in columnas %}
-                <th>{{ columna }}</th>
+{% extends "base.html" %}   
+{% block completo %}
+    <div class="container">
+       <h3>Datos de la tabla: {{ nombre_tabla }}</h3>    
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    {% for columna in columnas %}
+                    <th>{{ columna }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in registros %}
+                <tr>
+                    {% for campo in registro %}
+                    <td>{{ campo }}</td>
+                    {% endfor %}
+                </tr>
                 {% endfor %}
-            </tr>
-        </thead>
-        <tbody>
-            {% for registro in registros %}
-            <tr>
-                {% for campo in registro %}
-                <td>{{ campo }}</td>
-                {% endfor %}
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</div>
+            </tbody>
+        </table>
+    </div>
 {% endblock %}
+    
