@@ -74,7 +74,8 @@ def login():
     if tablas == -1:
         return render_template ("404.html")
     else:
-        return render_template("login.html",tablas=tablas, bbdd=session['bbdd'])
+        session['tablas'] = tablas
+        return render_template("tablas.html",tablas=session['tablas'], bbdd=session['bbdd'])
     
 @app.route('/login/<nombre_tabla>')
 def tabla(nombre_tabla):
