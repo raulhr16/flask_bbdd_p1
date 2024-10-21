@@ -58,7 +58,7 @@ def datos_bbdd(nombre,contraseña,nombre_bbdd,tabla):
         return datos_tablas, registros
     except psycopg2.Error as e:
         print("No puedo conectar a la base de datos:", e)
-        return -4
+        return -5
 
 @app.route('/')
 def inicio():
